@@ -1,17 +1,25 @@
 package com.agan.breakingnews.Fragment;
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.agan.breakingnews.Activity.ControlActivity;
 import com.agan.breakingnews.Adapter.FragmentAdapter;
+import com.agan.breakingnews.FragmentTrans;
 import com.agan.breakingnews.R;
 
 import java.util.ArrayList;
@@ -22,10 +30,14 @@ import java.util.List;
  * 主界面Fragment
  */
 
-public class MainFragment extends Fragment{
+public class MainFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener{
 
     private View view;
     private Toolbar title;
+    private NavigationView navView;
+    private DrawerLayout drawerlayout;
+    private TabLayout tabLayout;
+    private ViewPager content;
 
     @Nullable
     @Override
@@ -40,12 +52,40 @@ public class MainFragment extends Fragment{
      * 初始化界面
      */
     private void initView(){
+        navView = (NavigationView) view.findViewById(R.id.nav_view);
         title = (Toolbar) view.findViewById(R.id.title_tb);
-        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.switch_tl);
-        ViewPager content = (ViewPager) view.findViewById(R.id.content_vp);
+        drawerlayout = (DrawerLayout) view.findViewById(R.id.drawer_layout);
+        tabLayout = (TabLayout) view.findViewById(R.id.switch_tl);
+        content = (ViewPager) view.findViewById(R.id.content_vp);
+        navView.setNavigationItemSelectedListener(this);
+        titleSetting();
+        viewPagerSetting();
+    }
 
+    /**
+     * 初始化数据
+     */
+    private void initData(){
+    }
+
+    /**
+     * toolbar的设置
+     */
+    private void titleSetting(){
         title.setTitle("这里是title");
+        title.setNavigationIcon(R.mipmap.toobar_menu);
+        title.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerlayout.openDrawer(GravityCompat.START);
+            }
+        });
+    }
 
+    /**
+     * viewpager的设置
+     */
+    private void viewPagerSetting(){
         List<Fragment> fragmentList = new ArrayList<Fragment>();
         SchoolNewsFragment schoolNewsFragment = new SchoolNewsFragment();
         DomesticNewsFragment domesticNewsFragment = new DomesticNewsFragment();
@@ -61,13 +101,21 @@ public class MainFragment extends Fragment{
     }
 
     /**
-     * 初始化数据
+     * 侧滑栏Item的点击事件
+     * @param item  各个Item的ID
+     * @return      false
      */
-    private void initData(){
-    }
-
-    private void initFragment(){
-
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.nav_login:
+                if (getActivity() instanceof FragmentTrans){
+                    ((ControlActivity) getActivity()).toLoginFragment();
+                }
+                break;
+        }
+        return false;
     }
 
 }

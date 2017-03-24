@@ -7,10 +7,15 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.agan.breakingnews.Fragment.LoginFragment;
 import com.agan.breakingnews.Fragment.MainFragment;
+import com.agan.breakingnews.FragmentTrans;
 import com.agan.breakingnews.R;
 
-public class ControlActivity extends AppCompatActivity {
+public class ControlActivity extends AppCompatActivity implements FragmentTrans{
+
+    private FragmentManager manager;
+    private FragmentTransaction transaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +26,20 @@ public class ControlActivity extends AppCompatActivity {
     }
 
     private void init(){
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
+        manager = getSupportFragmentManager();
+        transaction = manager.beginTransaction();
         MainFragment mainFragment = new MainFragment();
         transaction.replace(R.id.content, mainFragment);
+        transaction.commit();
+    }
+
+    @Override
+    public void toLoginFragment() {
+        LoginFragment loginFragment = new LoginFragment();
+        manager = getSupportFragmentManager();
+        transaction = manager.beginTransaction();
+        transaction.replace(R.id.content, loginFragment, "login");
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 }
