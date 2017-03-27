@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import com.agan.breakingnews.Fragment.LoginFragment;
 import com.agan.breakingnews.Fragment.MainFragment;
+import com.agan.breakingnews.Fragment.NewsDetailFragment;
 import com.agan.breakingnews.FragmentTrans;
 import com.agan.breakingnews.R;
 
@@ -42,4 +43,21 @@ public class ControlActivity extends AppCompatActivity implements FragmentTrans{
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    @Override
+    public void toNewsDetailFragment(String newsTitle, String newsDetail, String newsPic) {
+        NewsDetailFragment newsDetailFragment = new NewsDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("title", newsTitle);
+        bundle.putString("detail", newsDetail);
+        bundle.putString("pic", newsPic);
+        newsDetailFragment.setArguments(bundle);
+        manager = getSupportFragmentManager();
+        transaction = manager.beginTransaction();
+        transaction.replace(R.id.content, newsDetailFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+
 }

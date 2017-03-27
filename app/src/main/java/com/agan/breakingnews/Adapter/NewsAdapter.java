@@ -39,7 +39,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     @Override
     public void onBindViewHolder(final NewsViewHolder holder, int position) {
-        new ImageLoadTask(holder.newsPic).execute(newsData.get(position).getNewsPic());
+//        if (!isPicNil(newsData.get(position).getNewsPic())){
+//            new ImageLoadTask(holder.newsPic).execute(newsData.get(position).getNewsPic());
+//        }else {
+//            holder.newsPic.setImageResource(R.mipmap.agan);
+//        }
+        holder.newsPic.setImageResource(R.mipmap.agan);
         holder.newsTitle.setText(newsData.get(position).getNewsTitle());
         holder.newsTime.setText(newsData.get(position).getNewsTime());
 
@@ -89,5 +94,19 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener onRecyclerItemClickListener){
         this.onRecyclerItemClickListener = onRecyclerItemClickListener;
+    }
+
+    /**
+     * 判断图片地址是否为空
+     * @param url   图片地址
+     * @return      true 为空
+     *              false 不为空
+     */
+    private boolean isPicNil(String url){
+        if (url.equals("nil")){
+            return true;
+        }else {
+            return false;
+        }
     }
 }

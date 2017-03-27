@@ -8,9 +8,9 @@ package com.agan.breakingnews;
  */
 
 public class App{
-    final static String BASE_URL = "http://10.0.3.2:3000";
-    final static String URL_LOGIN = "/login";
-    final static String URL_NEWS = "/news";
+    private final static String BASE_URL = "http://10.0.3.2:3000/api";
+    private final static String URL_LOGIN = "/login";
+    private final static String URL_NEWS = "/news";
 
     public static String getBaseUrl() {
         return BASE_URL;

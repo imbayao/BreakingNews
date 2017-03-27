@@ -1,25 +1,21 @@
 package com.agan.breakingnews.Adapter;
 
-
-
-
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.view.ViewGroup;
 
 import java.util.List;
 
 /**
- * Created by elso on 17-3-17.
- * fragment适配器
+ * Created by elso on 17-3-27.
  */
 
-public class FragmentAdapter extends FragmentPagerAdapter {
+public class FragmentStateAdapter extends FragmentStatePagerAdapter {
 
     private List<Fragment> fragmentList;
 
-    public FragmentAdapter(FragmentManager fm, List<Fragment> fragmentList) {
+    public FragmentStateAdapter(FragmentManager fm, List<Fragment> fragmentList) {
         super(fm);
         this.fragmentList = fragmentList;
     }
@@ -32,6 +28,16 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return fragmentList.size();
+    }
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        return super.instantiateItem(container, position);
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        super.destroyItem(container, position, object);
     }
 
     /**

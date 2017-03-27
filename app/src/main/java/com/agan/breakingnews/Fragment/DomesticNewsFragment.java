@@ -4,11 +4,14 @@ package com.agan.breakingnews.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.agan.breakingnews.App;
 import com.agan.breakingnews.R;
+import com.agan.breakingnews.Utils.NewsTask;
 
 /**
  * Created by elso on 17-3-17.
@@ -17,6 +20,7 @@ import com.agan.breakingnews.R;
 
 public class DomesticNewsFragment extends Fragment {
     private View view;
+    private RecyclerView domesticList;
 
     @Nullable
     @Override
@@ -27,6 +31,7 @@ public class DomesticNewsFragment extends Fragment {
     }
 
     private void initView(){
-
+        domesticList = (RecyclerView) view.findViewById(R.id.domesticList_rv);
+//        new NewsTask(getActivity(), domesticList).execute(App.getBaseUrl()+App.getUrlNews());
     }
 }

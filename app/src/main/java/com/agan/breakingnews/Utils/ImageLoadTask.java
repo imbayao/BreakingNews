@@ -15,6 +15,7 @@ public class ImageLoadTask extends AsyncTask<String, Void, Bitmap> {
 
     private ImageView imageView;
 
+
     public ImageLoadTask(ImageView imageView){
         this.imageView = imageView;
     }
@@ -27,7 +28,6 @@ public class ImageLoadTask extends AsyncTask<String, Void, Bitmap> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        imageView.setImageResource(R.mipmap.agan);
     }
 
     @Override

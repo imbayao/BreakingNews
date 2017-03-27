@@ -25,19 +25,18 @@ public class JSONParsing {
     public static List<News> jsonParsingWithNews(String response){
         List<News> newsData = new ArrayList<>();
         try {
-            JSONArray jsonArray = new JSONArray(response);
-            for (int i = 0; i < response.length(); i++) {
-                JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+            JSONArray result = new JSONArray(response);
+            for (int i = 0; i < result.length(); i++) {
+                JSONObject jsonObject = (JSONObject) result.get(i);
                 String newsTitle = jsonObject.getString("newstitle");
                 String newsTime = jsonObject.getString("newstime");
                 String newsPic = jsonObject.getString("newspic");
-                Log.i("-------->newsTitle", newsTitle);
-                Log.i("-------->newsTime", newsTime);
-                Log.i("-------->newsPic", newsPic);
+                String newsDetail = jsonObject.getString("newsdetail");
                 News news = new News();
                 news.setNewsTitle(newsTitle);
                 news.setNewsTime(newsTime);
                 news.setNewsPic(newsPic);
+                news.setNewsDetail(newsDetail);
                 newsData.add(news);
             }
         }catch (Exception e){

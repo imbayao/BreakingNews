@@ -9,16 +9,15 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.agan.breakingnews.Activity.ControlActivity;
-import com.agan.breakingnews.Adapter.FragmentAdapter;
+import com.agan.breakingnews.Adapter.FragmentStateAdapter;
 import com.agan.breakingnews.FragmentTrans;
 import com.agan.breakingnews.R;
 
@@ -95,7 +94,7 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
         fragmentList.add(domesticNewsFragment);
         fragmentList.add(internationalNewsFragment);
         fragmentList.add(seeSomethingFragment);
-        FragmentAdapter adapter = new FragmentAdapter(getActivity().getSupportFragmentManager(), fragmentList);
+        FragmentStateAdapter adapter = new FragmentStateAdapter(getChildFragmentManager(), fragmentList);
         content.setAdapter(adapter);
         tabLayout.setupWithViewPager(content);
     }
