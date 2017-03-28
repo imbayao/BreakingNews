@@ -1,8 +1,5 @@
 package com.agan.breakingnews.Bean;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 /**
  * Created by elso on 17-3-24.
  * 新闻实体类
@@ -14,7 +11,6 @@ public class News{
     private String newsTime;
     private String newsPic;
     private String newsDetail;
-
 
     public String getNewsTitle() {
         return newsTitle;

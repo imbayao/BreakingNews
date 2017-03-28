@@ -15,7 +15,10 @@ public class ImageLoadTask extends AsyncTask<String, Void, Bitmap> {
 
     private ImageView imageView;
 
-
+    /**
+     * 构造函数
+     * @param imageView 显示图片的ImageView
+     */
     public ImageLoadTask(ImageView imageView){
         this.imageView = imageView;
     }
@@ -34,6 +37,5 @@ public class ImageLoadTask extends AsyncTask<String, Void, Bitmap> {
     protected void onPostExecute(Bitmap bitmap) {
         super.onPostExecute(bitmap);
         imageView.setImageBitmap(bitmap);
-
     }
 }

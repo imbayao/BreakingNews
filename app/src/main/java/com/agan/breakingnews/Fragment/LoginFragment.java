@@ -10,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.agan.breakingnews.Bean.News;
+import com.agan.breakingnews.FragmentTrans;
 import com.agan.breakingnews.R;
 import com.agan.breakingnews.Utils.HttpRequest;
 
@@ -19,7 +21,7 @@ import java.util.List;
 
 /**
  * Created by elso on 17-3-24.
- * 登录界面
+ * 登录页面
  */
 
 public class LoginFragment extends Fragment implements View.OnClickListener{
@@ -28,7 +30,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     private EditText username;
     private EditText password;
     private Button login;
-    private HttpRequest httpRequest = new HttpRequest();
+    private TextView register;
 
     @Nullable
     @Override
@@ -41,17 +43,23 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     private void initView(){
         username = (EditText) view.findViewById(R.id.username_et);
         password = (EditText) view.findViewById(R.id.password_et);
+        register = (TextView) view.findViewById(R.id.register_tv);
         login = (Button) view.findViewById(R.id.login_bt);
         login.setOnClickListener(this);
+        register.setOnClickListener(this);
     }
 
-    private List<News> data;
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_bt:
 
+                break;
+            case R.id.register_tv:
+                if (getActivity() instanceof FragmentTrans){
+                    ((FragmentTrans) getActivity()).toRegisterFragment();
+                }
                 break;
         }
     }

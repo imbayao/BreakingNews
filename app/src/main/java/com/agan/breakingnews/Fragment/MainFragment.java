@@ -1,6 +1,7 @@
 package com.agan.breakingnews.Fragment;
 
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -10,11 +11,11 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.agan.breakingnews.Activity.ControlActivity;
 import com.agan.breakingnews.Adapter.FragmentStateAdapter;
@@ -26,10 +27,10 @@ import java.util.List;
 
 /**
  * Created by elso on 17-3-17.
- * 主界面Fragment
+ * 主页面
  */
 
-public class MainFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener{
+public class MainFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener{
 
     private View view;
     private Toolbar title;
@@ -37,13 +38,13 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
     private DrawerLayout drawerlayout;
     private TabLayout tabLayout;
     private ViewPager content;
+    private FloatingActionButton floatingActionButton;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_main, container, false);
         initView();
-        initData();
         return view;
     }
 
@@ -56,22 +57,18 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
         drawerlayout = (DrawerLayout) view.findViewById(R.id.drawer_layout);
         tabLayout = (TabLayout) view.findViewById(R.id.switch_tl);
         content = (ViewPager) view.findViewById(R.id.content_vp);
+        floatingActionButton = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
+        floatingActionButton.setOnClickListener(this);
         navView.setNavigationItemSelectedListener(this);
         titleSetting();
         viewPagerSetting();
     }
 
     /**
-     * 初始化数据
-     */
-    private void initData(){
-    }
-
-    /**
      * toolbar的设置
      */
     private void titleSetting(){
-        title.setTitle("这里是title");
+        title.setTitle("新闻客户端");
         title.setNavigationIcon(R.mipmap.toobar_menu);
         title.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +85,7 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
         List<Fragment> fragmentList = new ArrayList<Fragment>();
         SchoolNewsFragment schoolNewsFragment = new SchoolNewsFragment();
         DomesticNewsFragment domesticNewsFragment = new DomesticNewsFragment();
-        InternationalNewsFragment internationalNewsFragment = new InternationalNewsFragment();
+        WorldNewsFragment internationalNewsFragment = new WorldNewsFragment();
         SeeSomethingFragment seeSomethingFragment = new SeeSomethingFragment();
         fragmentList.add(schoolNewsFragment);
         fragmentList.add(domesticNewsFragment);
@@ -117,4 +114,12 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
         return false;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.floatingActionButton:
+                Toast.makeText(getActivity(), "lalalala", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
 }

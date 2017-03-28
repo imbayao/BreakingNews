@@ -33,6 +33,13 @@ public class NewsTask extends AsyncTask<String, Void, String> {
     private SwipeRefreshLayout swipeRefreshLayout;
     private int isRefresh;
 
+    /**
+     * 构造函数
+     * @param context               上下文
+     * @param newsList              显示新闻的RecyclerView
+     * @param swipeRefreshLayout    刷新的SwipeRefreshLayout
+     * @param isRefresh             判断是否为刷新操作 0不是 1是
+     */
     public NewsTask(Context context, RecyclerView newsList, SwipeRefreshLayout swipeRefreshLayout, int isRefresh){
         this.context = context;
         this.newsList = newsList;
@@ -48,13 +55,12 @@ public class NewsTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... params) {
-        return HttpRequest.httpURLConnectionWithGet(params[0]);
+        return HttpRequest.httpURLConnectionWithNewsGet(params[0]);
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-
         if (s != null){
             if (swipeRefreshLayout != null && isRefresh == 1){
                 swipeRefreshLayout.setRefreshing(false);

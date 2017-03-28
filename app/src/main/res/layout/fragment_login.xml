@@ -4,29 +4,51 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:layout_centerHorizontal="true"
         android:id="@+id/loginInfo_rl">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/username"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="用户名"
             android:id="@+id/username_et"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/username_et"
+            android:src="@mipmap/password"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="密码"
             android:layout_below="@id/username_et"
             android:id="@+id/password_et"/>
     </RelativeLayout>
-    <RelativeLayout
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/loginInfo_rl">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="登录"
-            android:id="@+id/login_bt"/>
-    </RelativeLayout>
+        android:layout_below="@id/loginInfo_rl"
+        android:layout_marginTop="80dp"
+        android:layout_centerHorizontal="true"
+        android:text="登录"
+        android:id="@+id/login_bt"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="注册"
+        android:layout_alignBottom="@+id/login_bt"
+        android:layout_toEndOf="@+id/login_bt"
+        android:layout_marginStart="30dp"
+        android:id="@+id/register_tv"/>
 </RelativeLayout>

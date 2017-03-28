@@ -21,12 +21,17 @@ import java.net.URL;
 
 public class HttpRequest {
 
+    public static void httpURLConnectionWithLogin(){
+
+    }
+
+
     /**
      * GET请求数据
      * @param address   请求地址
      * @return          获取json
      */
-    public static String httpURLConnectionWithGet(String address){
+    public static String httpURLConnectionWithNewsGet(String address){
         HttpURLConnection connection = null;
         StringBuffer response = new StringBuffer("");
         try {

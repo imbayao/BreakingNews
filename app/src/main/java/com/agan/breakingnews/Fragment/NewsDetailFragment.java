@@ -34,12 +34,18 @@ public class NewsDetailFragment extends Fragment {
         return view;
     }
 
+    /**
+     * 初始化页面
+     */
     private void initView(){
         newsDetailTitle = (TextView) view.findViewById(R.id.newsDetailTitle_tv);
         newsDetailContent = (TextView) view.findViewById(R.id.newsDetailContent_tv);
         newsDetailPic = (ImageView) view.findViewById(R.id.newsDetailPic_iv);
     }
 
+    /**
+     * 初始化数据
+     */
     private void initData(){
         newsDetailTitle.setText(getArguments().getString("title"));
         newsDetailContent.setText(getArguments().getString("detail"));
@@ -50,10 +56,6 @@ public class NewsDetailFragment extends Fragment {
         }else {
             newsDetailPic.setImageResource(R.mipmap.agan);
         }
-
     }
-
-
-
 
 }

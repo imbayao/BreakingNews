@@ -1,7 +1,5 @@
 package com.agan.breakingnews.Utils;
 
-import android.util.Log;
-
 import com.agan.breakingnews.Bean.News;
 
 import org.json.JSONArray;

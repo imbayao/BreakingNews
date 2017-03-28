@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Created by elso on 17-3-27.
+ * viewpager适配器
  */
 
 public class FragmentStateAdapter extends FragmentStatePagerAdapter {
@@ -43,7 +44,7 @@ public class FragmentStateAdapter extends FragmentStatePagerAdapter {
     /**
      * 显示标题
      * @param position  标题位置
-     * @return  nil
+     * @return          nil
      */
     @Override
     public CharSequence getPageTitle(int position) {

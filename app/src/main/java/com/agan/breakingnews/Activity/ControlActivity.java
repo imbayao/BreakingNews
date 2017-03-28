@@ -1,6 +1,5 @@
 package com.agan.breakingnews.Activity;
 
-import android.support.v4.app.Fragment;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,6 +9,7 @@ import android.os.Bundle;
 import com.agan.breakingnews.Fragment.LoginFragment;
 import com.agan.breakingnews.Fragment.MainFragment;
 import com.agan.breakingnews.Fragment.NewsDetailFragment;
+import com.agan.breakingnews.Fragment.RegisterFragment;
 import com.agan.breakingnews.FragmentTrans;
 import com.agan.breakingnews.R;
 
@@ -23,9 +23,11 @@ public class ControlActivity extends AppCompatActivity implements FragmentTrans{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control);
         init();
-
     }
 
+    /**
+     * 初始化Fragment
+     */
     private void init(){
         manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();
@@ -34,16 +36,35 @@ public class ControlActivity extends AppCompatActivity implements FragmentTrans{
         transaction.commit();
     }
 
+    /**
+     * 跳转登录页面
+     */
     @Override
     public void toLoginFragment() {
         LoginFragment loginFragment = new LoginFragment();
         manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();
-        transaction.replace(R.id.content, loginFragment, "login");
+        transaction.replace(R.id.content, loginFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
+    @Override
+    public void toRegisterFragment() {
+        RegisterFragment registerFragment = new RegisterFragment();
+        manager = getSupportFragmentManager();
+        transaction = manager.beginTransaction();
+        transaction.replace(R.id.content, registerFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    /**
+     * 跳转新闻详细页面
+     * @param newsTitle     新闻标题
+     * @param newsDetail    新闻正文
+     * @param newsPic       新闻图片URL
+     */
     @Override
     public void toNewsDetailFragment(String newsTitle, String newsDetail, String newsPic) {
         NewsDetailFragment newsDetailFragment = new NewsDetailFragment();

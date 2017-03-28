@@ -23,7 +23,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     private LayoutInflater layoutInflater;
     private List<News> newsData;
-
     private OnRecyclerItemClickListener onRecyclerItemClickListener;
 
     public NewsAdapter(Context context, List<News> newsData){
@@ -87,9 +86,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         }
     }
 
+    /**
+     * RecyclerView点击接口
+     */
     public interface OnRecyclerItemClickListener{
-        void onItemClick(View view, int position);
-        void onItemLongClick(View view, int position);
+        void onItemClick(View view, int position);      //单次点击
+        void onItemLongClick(View view, int position);  //长按点击
     }
 
     public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener onRecyclerItemClickListener){

@@ -16,19 +16,20 @@ import com.agan.breakingnews.Utils.NewsTask;
 
 /**
  * Created by elso on 17-3-17.
- * 国内新闻页面
+ * 国际新闻页面
  */
 
-public class DomesticNewsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class WorldNewsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener
+{
 
     private View view;
-    private RecyclerView domesticList;
-    private SwipeRefreshLayout domesticSwipeRefresh;
+    private RecyclerView worldList;
+    private SwipeRefreshLayout worldSwipeRefresh;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_domesticnews, container, false);
+        view = inflater.inflate(R.layout.fragment_worldnews, container, false);
         initView();
         return view;
     }
@@ -37,10 +38,10 @@ public class DomesticNewsFragment extends Fragment implements SwipeRefreshLayout
      * 初始化页面
      */
     private void initView(){
-        domesticList = (RecyclerView) view.findViewById(R.id.domesticList_rv);
-        domesticSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.domesticSwipeRefresh_srl);
-        domesticSwipeRefresh.setOnRefreshListener(this);
-        new NewsTask(getActivity(), domesticList, domesticSwipeRefresh, 0).execute(App.getBaseUrl()+App.getUrlDomesticNews());
+        worldSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.worldSwipeRefresh_srl);
+        worldList = (RecyclerView) view.findViewById(R.id.worldList_rv);
+        worldSwipeRefresh.setOnRefreshListener(this);
+        new NewsTask(getActivity(), worldList, worldSwipeRefresh, 0).execute(App.getBaseUrl()+App.getUrlWorldNews());
     }
 
     /**
@@ -48,6 +49,6 @@ public class DomesticNewsFragment extends Fragment implements SwipeRefreshLayout
      */
     @Override
     public void onRefresh() {
-        new NewsTask(getActivity(), domesticList, domesticSwipeRefresh, 1).execute(App.getBaseUrl()+App.getUrlDomesticNews());
+        new NewsTask(getActivity(), worldList, worldSwipeRefresh, 1).execute(App.getBaseUrl()+App.getUrlWorldNews());
     }
 }

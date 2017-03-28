@@ -35,8 +35,6 @@ public class SchoolNewsFragment extends Fragment implements  SwipeRefreshLayout.
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_schoolnews, container, false);
         init();
-
-
         return view;
     }
 
@@ -47,12 +45,15 @@ public class SchoolNewsFragment extends Fragment implements  SwipeRefreshLayout.
         schoolSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.schoolSwipeRefresh_srl);
         schoolList = (RecyclerView) view.findViewById(R.id.schoolList_rv);
         schoolSwipeRefresh.setOnRefreshListener(this);
-        new NewsTask(getActivity(), schoolList, schoolSwipeRefresh, 0).execute(App.getBaseUrl()+App.getUrlNews());
+        new NewsTask(getActivity(), schoolList, schoolSwipeRefresh, 0).execute(App.getBaseUrl()+App.getUrlSchoolNews());
     }
 
+    /**
+     * SwipeRefreshLayout刷新事件
+     */
     @Override
     public void onRefresh() {
-        new NewsTask(getActivity(), schoolList, schoolSwipeRefresh, 1).execute(App.getBaseUrl()+App.getUrlNews());
+        new NewsTask(getActivity(), schoolList, schoolSwipeRefresh, 1).execute(App.getBaseUrl()+App.getUrlSchoolNews());
     }
 
 }
