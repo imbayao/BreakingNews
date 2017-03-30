@@ -15,26 +15,46 @@
         <ScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
                     android:id="@+id/newsDetailPic_iv"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/newsDetailPic_iv"
                     android:id="@+id/newsDetailContent_tv"/>
-            </LinearLayout>
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/newsDetailContent_tv"
+                    android:id="@+id/comment_lv"/>
+            </RelativeLayout>
         </ScrollView>
     </LinearLayout>
 
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:hint="请输入评论"
-        android:id="@+id/comment_et"/>
+        android:orientation="horizontal"
+        android:weightSum="1">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="请输入评论"
+            android:id="@+id/comment_et" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="send"
+            android:id="@+id/sendComment_bt"/>
+    </LinearLayout>
+
+
 </RelativeLayout>

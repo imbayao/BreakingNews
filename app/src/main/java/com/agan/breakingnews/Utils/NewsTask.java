@@ -68,6 +68,7 @@ public class NewsTask extends AsyncTask<String, Void, String> {
             }
             newsData = JSONParsing.jsonParsingWithNews(s);
             newsList.setLayoutManager(new LinearLayoutManager(context));
+            newsList.addItemDecoration(new NewsDecoration(context, NewsDecoration.VERTICAL_LIST));
             NewsAdapter newsAdapter = new NewsAdapter(context, newsData);
             newsAdapter.notifyDataSetChanged();
             newsAdapter.setOnRecyclerItemClickListener(new NewsAdapter.OnRecyclerItemClickListener() {
@@ -75,7 +76,7 @@ public class NewsTask extends AsyncTask<String, Void, String> {
                 public void onItemClick(View view, int position) {
                     if (context instanceof FragmentTrans){
                          ((FragmentTrans) context).toNewsDetailFragment(newsData.get(position).getNewsTitle(),
-                                 newsData.get(position).getNewsDetail(), newsData.get(position).getNewsPic());
+                                 newsData.get(position).getNewsDetail(), newsData.get(position).getNewsPic(), newsData.get(position).getId());
                     }
                 }
 
@@ -84,6 +85,7 @@ public class NewsTask extends AsyncTask<String, Void, String> {
 
                 }
             });
+
             newsList.setAdapter(newsAdapter);
         }
     }

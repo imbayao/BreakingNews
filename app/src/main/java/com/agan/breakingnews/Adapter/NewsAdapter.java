@@ -10,7 +10,8 @@ import android.widget.TextView;
 
 import com.agan.breakingnews.Bean.News;
 import com.agan.breakingnews.R;
-import com.agan.breakingnews.Utils.ImageLoadTask;
+import com.agan.breakingnews.Utils.ImageLoad;
+import com.agan.breakingnews.Utils.StringUtil;
 
 import java.util.List;
 
@@ -19,15 +20,17 @@ import java.util.List;
  * 新闻适配器
  */
 
-public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
+public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder>{
 
     private LayoutInflater layoutInflater;
     private List<News> newsData;
     private OnRecyclerItemClickListener onRecyclerItemClickListener;
+    private ImageLoad imageLoad;
 
     public NewsAdapter(Context context, List<News> newsData){
         this.layoutInflater = LayoutInflater.from(context);
         this.newsData = newsData;
+        imageLoad = new ImageLoad();
     }
 
     @Override
@@ -38,14 +41,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     @Override
     public void onBindViewHolder(final NewsViewHolder holder, int position) {
+
+        holder.newsPic.setTag(newsData.get(position).getNewsPic());
+        if (!isSchoolPic(newsData.get(position).getNewsKindId())){
+            imageLoad.loadImageByTask(holder.newsPic, newsData.get(position).getNewsPic(), false);
+        }
 //        if (!isPicNil(newsData.get(position).getNewsPic())){
-//            new ImageLoadTask(holder.newsPic).execute(newsData.get(position).getNewsPic());
-//        }else {
-//            holder.newsPic.setImageResource(R.mipmap.agan);
+//            showImageByTask(holder.newsPic, newsData.get(position).getNewsPic());
 //        }
-        holder.newsPic.setImageResource(R.mipmap.agan);
         holder.newsTitle.setText(newsData.get(position).getNewsTitle());
-        holder.newsTime.setText(newsData.get(position).getNewsTime());
+        holder.newsTime.setText(StringUtil.newsTimeToMonthDay(newsData.get(position).getNewsTime()));
 
         if (onRecyclerItemClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +76,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     public int getItemCount() {
         return newsData.size();
     }
+
+
 
     class NewsViewHolder extends RecyclerView.ViewHolder{
 
@@ -106,6 +113,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
      */
     private boolean isPicNil(String url){
         if (url.equals("nil")){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private boolean isSchoolPic(int newsKindId){
+        if (newsKindId == 1){
             return true;
         }else {
             return false;

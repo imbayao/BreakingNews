@@ -66,12 +66,13 @@ public class ControlActivity extends AppCompatActivity implements FragmentTrans{
      * @param newsPic       新闻图片URL
      */
     @Override
-    public void toNewsDetailFragment(String newsTitle, String newsDetail, String newsPic) {
+    public void toNewsDetailFragment(String newsTitle, String newsDetail, String newsPic, int id) {
         NewsDetailFragment newsDetailFragment = new NewsDetailFragment();
         Bundle bundle = new Bundle();
         bundle.putString("title", newsTitle);
         bundle.putString("detail", newsDetail);
         bundle.putString("pic", newsPic);
+        bundle.putInt("newsid", id);
         newsDetailFragment.setArguments(bundle);
         manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();

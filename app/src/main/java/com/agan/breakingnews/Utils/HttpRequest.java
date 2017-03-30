@@ -9,6 +9,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -21,8 +22,45 @@ import java.net.URL;
 
 public class HttpRequest {
 
-    public static void httpURLConnectionWithLogin(){
-
+    /**
+     * 用户网络请求
+     * @param address   请求地址
+     * @param username  用户名
+     * @param password  密码
+     * @return          JSON
+     */
+    public static String httpURLConnectionWithUser(String address, String username, String password){
+        HttpURLConnection connection = null;
+        String postMessage = "username=" + username + "&password=" + password;
+        StringBuffer response = new StringBuffer("");
+        try {
+            URL url = new URL(address);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setConnectTimeout(20000);
+            connection.setReadTimeout(20000);
+            connection.setDoInput(true);
+            OutputStream out = connection.getOutputStream();
+            out.write(postMessage.getBytes());
+            out.flush();
+            out.close();
+            InputStreamReader in = new InputStreamReader(connection.getInputStream());
+            BufferedReader reader = new BufferedReader(in);
+            response = new StringBuffer();
+            String line = null;
+            while ((line = reader.readLine()) != null){
+                response.append(line);
+            }
+            Log.i("----------->", response.toString());
+            return response.toString();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+        return response.toString();
     }
 
 
@@ -84,4 +122,68 @@ public class HttpRequest {
         }
         return bitmap;
     }
+
+    public static String httpURLConnectionWithCommentSend(String address, int newsId, int userId, String comment){
+        HttpURLConnection connection = null;
+        String postMessage = "newsid=" + newsId + "&userid=" + userId + "&comment=" + comment;
+        StringBuffer response = new StringBuffer("");
+        try {
+            URL url = new URL(address);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setConnectTimeout(20000);
+            connection.setReadTimeout(20000);
+            connection.setDoInput(true);
+            OutputStream out = connection.getOutputStream();
+            out.write(postMessage.getBytes());
+            out.flush();
+            out.close();
+            InputStreamReader in = new InputStreamReader(connection.getInputStream());
+            BufferedReader reader = new BufferedReader(in);
+            response = new StringBuffer();
+            String line = null;
+            while ((line = reader.readLine()) != null){
+                response.append(line);
+            }
+            Log.i("----------->", response.toString());
+            return response.toString();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+        return response.toString();
+    }
+
+    public static String httpURLConnectionWithCommentGet(String address, int newsId){
+        HttpURLConnection connection = null;
+        String addres = address + "?newsid=" + newsId;
+        StringBuffer response = new StringBuffer("");
+        try {
+            URL url = new URL(addres);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setConnectTimeout(20000);
+            connection.setReadTimeout(20000);
+            InputStream in = connection.getInputStream();
+            String line = "";
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            response = new StringBuffer("");
+            while ((line = reader.readLine()) != null){
+                response.append(line);
+            }
+            Log.i("----------->", response.toString());
+            return response.toString();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+        return response.toString();
+    }
+
 }

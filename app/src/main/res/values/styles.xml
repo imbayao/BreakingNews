@@ -9,6 +9,8 @@
         <!-- 隐藏ActionBar -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+        <item name="android:listDivider">@drawable/news_divider</item>
     </style>
 
 </resources>

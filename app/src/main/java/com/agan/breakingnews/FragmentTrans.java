@@ -20,5 +20,5 @@ public interface FragmentTrans {
      * @param newsDetail    新闻正文
      * @param newsPic       新闻图片URL
      */
-    void toNewsDetailFragment(String newsTitle, String newsDetail, String newsPic);
+    void toNewsDetailFragment(String newsTitle, String newsDetail, String newsPic, int id);
 }

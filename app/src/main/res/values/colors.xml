@@ -6,4 +6,8 @@
     <!-- RecyclerItem点击颜色 -->
     <color name="colorNewsItemPress">#FF0000</color>
     <color name="colorNewsItemNormal">#FFFFFF</color>
+    <!-- 文本颜色 -->
+    <color name="textColor">#4F4F4F</color>
+    <!-- 分割线颜色 -->
+    <color name="colorNewsDivider">#E8E8E8</color>
 </resources>
