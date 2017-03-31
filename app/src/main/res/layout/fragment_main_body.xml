@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
+            app:tabTextColor="@color/textColor"
             android:id="@+id/switch_tl"/>
     </android.support.design.widget.AppBarLayout>
 

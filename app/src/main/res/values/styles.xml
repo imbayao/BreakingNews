@@ -12,5 +12,4 @@
 
         <item name="android:listDivider">@drawable/news_divider</item>
     </style>
-
 </resources>

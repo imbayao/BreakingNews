@@ -21,4 +21,12 @@ public interface FragmentTrans {
      * @param newsPic       新闻图片URL
      */
     void toNewsDetailFragment(String newsTitle, String newsDetail, String newsPic, int id);
+
+    void toCommentFragment(int newsId);
+
+    void toUserInfoFragment();
+
+    void toSuggestFragment();
+
+    void toAboutFragment();
 }

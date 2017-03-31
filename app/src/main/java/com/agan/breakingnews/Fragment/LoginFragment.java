@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                 case 1:
                     progressDialog.dismiss();
                     Toast.makeText(getActivity(), msg.obj.toString(), Toast.LENGTH_SHORT).show();
+                    FragmentManager fm = getFragmentManager();
+                    fm.popBackStack();
                     break;
                 case 0:
                     progressDialog.dismiss();

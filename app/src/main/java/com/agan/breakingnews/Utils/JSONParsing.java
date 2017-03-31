@@ -30,6 +30,8 @@ public class JSONParsing {
             String message = object.getString("message");
             if(biu.equals("1")){
                 String token = object.getString("token");
+                String userName = object.getString("username");
+                App.setUserName(userName);
                 App.setTOKEN(token);
                 status.put("biu", biu);
                 status.put("message", message);
@@ -85,7 +87,7 @@ public class JSONParsing {
             JSONArray result = new JSONArray(response);
             for (int i = 0; i < result.length(); i++) {
                 JSONObject jsonObject = (JSONObject) result.get(i);
-                String commentUsername = jsonObject.getString("newstitle");
+                String commentUsername = jsonObject.getString("username");
                 String commentContent = jsonObject.getString("content");
                 String commentTime = jsonObject.getString("created_at");
                 Comment comment = new Comment();
@@ -100,6 +102,11 @@ public class JSONParsing {
         return commentData;
     }
 
+    /**
+     *
+     * @param response
+     * @return
+     */
     public static Map<String, String> jsonParsingWithCommentSend(String response){
         Map<String, String> status = new HashMap<String, String>();
         try {

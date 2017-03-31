@@ -1,17 +1,25 @@
 package com.agan.breakingnews.Activity;
 
 
+import android.os.Build;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.WindowManager;
 
+import com.agan.breakingnews.Fragment.AboutFragment;
+import com.agan.breakingnews.Fragment.CommentFragment;
 import com.agan.breakingnews.Fragment.LoginFragment;
 import com.agan.breakingnews.Fragment.MainFragment;
 import com.agan.breakingnews.Fragment.NewsDetailFragment;
 import com.agan.breakingnews.Fragment.RegisterFragment;
+import com.agan.breakingnews.Fragment.SuggestFragment;
+import com.agan.breakingnews.Fragment.UserInfoFragment;
 import com.agan.breakingnews.FragmentTrans;
 import com.agan.breakingnews.R;
+import com.agan.breakingnews.Utils.NightModeHelper;
 
 public class ControlActivity extends AppCompatActivity implements FragmentTrans{
 
@@ -77,6 +85,49 @@ public class ControlActivity extends AppCompatActivity implements FragmentTrans{
         manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();
         transaction.replace(R.id.content, newsDetailFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void toCommentFragment(int newsId) {
+        CommentFragment commentFragment = new CommentFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("newsid", newsId);
+        commentFragment.setArguments(bundle);
+        manager = getSupportFragmentManager();
+        transaction = manager.beginTransaction();
+        transaction.replace(R.id.content, commentFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void toUserInfoFragment() {
+        UserInfoFragment userInfoFragment = new UserInfoFragment();
+        manager = getSupportFragmentManager();
+        transaction = manager.beginTransaction();
+        transaction.replace(R.id.content, userInfoFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void toSuggestFragment() {
+        SuggestFragment suggestFragment = new SuggestFragment();
+        manager = getSupportFragmentManager();
+        transaction = manager.beginTransaction();
+        transaction.replace(R.id.content, suggestFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void toAboutFragment() {
+        AboutFragment aboutFragment = new AboutFragment();
+        manager = getSupportFragmentManager();
+        transaction = manager.beginTransaction();
+        transaction.replace(R.id.content, aboutFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }

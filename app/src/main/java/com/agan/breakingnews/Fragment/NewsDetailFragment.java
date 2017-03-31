@@ -6,20 +6,19 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.agan.breakingnews.App;
+import com.agan.breakingnews.FragmentTrans;
 import com.agan.breakingnews.R;
-import com.agan.breakingnews.Utils.CommentTask;
 import com.agan.breakingnews.Utils.HttpRequest;
 import com.agan.breakingnews.Utils.ImageLoad;
 import com.agan.breakingnews.Utils.JSONParsing;
@@ -39,11 +38,10 @@ public class NewsDetailFragment extends Fragment implements View.OnClickListener
     private ImageView newsDetailPic;
     private ImageLoad imageLoad;
     private EditText comment;
-    private ListView commentList;
     private Button sendComment;
+    private ImageView commentPic;
     private int newsId;
-    private int userId;
-    private ProgressDialog progressDialog;
+    private String userName;
     private ProgressDialog sendCommentProgress;
     private Handler handler = new Handler(){
         @Override
@@ -66,6 +64,7 @@ public class NewsDetailFragment extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_newsdetail, container, false);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         initView();
         initData();
         return view;
@@ -79,22 +78,22 @@ public class NewsDetailFragment extends Fragment implements View.OnClickListener
         newsDetailContent = (TextView) view.findViewById(R.id.newsDetailContent_tv);
         newsDetailPic = (ImageView) view.findViewById(R.id.newsDetailPic_iv);
         comment = (EditText) view.findViewById(R.id.comment_et);
-        commentList = (ListView) view.findViewById(R.id.comment_lv);
         sendComment = (Button) view.findViewById(R.id.sendComment_bt);
+        commentPic = (ImageView) view.findViewById(R.id.commentPic);
         sendComment.setOnClickListener(this);
-        progressDialog = new ProgressDialog(getActivity());
+        commentPic.setOnClickListener(this);
         sendCommentProgress = new ProgressDialog(getActivity());
-        progressDialog.show();
     }
 
     /**
      * 初始化数据
      */
     private void initData(){
-        newsId = getArguments().getInt("newsId");
+        newsId = getArguments().getInt("newsid");
         newsDetailTitle.setText(getArguments().getString("title"));
         newsDetailContent.setText(getArguments().getString("detail"));
         String pic = getArguments().getString("pic");
+        userName = App.getUserName();
         assert pic != null;
         if (!pic.equals("nil")){
             imageLoad = new ImageLoad();
@@ -102,13 +101,9 @@ public class NewsDetailFragment extends Fragment implements View.OnClickListener
         }else {
             newsDetailPic.setImageResource(R.mipmap.agan);
         }
-        loadComment();
     }
 
-    private void loadComment(){
-        new CommentTask(getActivity(), commentList, progressDialog, newsId)
-                .execute(App.getBaseUrl() + App.getUrlCommentGet());
-    }
+
 
     private void sendToComment(){
         new Thread(new Runnable() {
@@ -116,7 +111,7 @@ public class NewsDetailFragment extends Fragment implements View.OnClickListener
             public void run() {
                 Message message = new Message();
                 String response = HttpRequest.httpURLConnectionWithCommentSend(App.getBaseUrl() + App.getUrlCommentSend(),
-                        newsId, userId, comment.getText().toString());
+                        newsId, userName, comment.getText().toString());
                 Map<String, String> status = JSONParsing.jsonParsingWithCommentSend(response);
                 if (status.get("biu").equals("1")){
                     message.what = 1;
@@ -137,6 +132,11 @@ public class NewsDetailFragment extends Fragment implements View.OnClickListener
             case R.id.sendComment_bt:
                 sendCommentProgress.show();
                 sendToComment();
+                break;
+            case R.id.commentPic:
+                if (getActivity() instanceof FragmentTrans){
+                   ((FragmentTrans) getActivity()).toCommentFragment(newsId);
+                }
                 break;
         }
     }

@@ -123,9 +123,9 @@ public class HttpRequest {
         return bitmap;
     }
 
-    public static String httpURLConnectionWithCommentSend(String address, int newsId, int userId, String comment){
+    public static String httpURLConnectionWithCommentSend(String address, int newsId, String userName, String comment){
         HttpURLConnection connection = null;
-        String postMessage = "newsid=" + newsId + "&userid=" + userId + "&comment=" + comment;
+        String postMessage = "newsid=" + newsId + "&username=" + userName + "&content=" + comment;
         StringBuffer response = new StringBuffer("");
         try {
             URL url = new URL(address);

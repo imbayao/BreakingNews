@@ -1,5 +1,7 @@
 package com.agan.breakingnews.Fragment;
 
+import android.app.UiModeManager;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -19,8 +21,10 @@ import android.widget.Toast;
 
 import com.agan.breakingnews.Activity.ControlActivity;
 import com.agan.breakingnews.Adapter.FragmentStateAdapter;
+import com.agan.breakingnews.App;
 import com.agan.breakingnews.FragmentTrans;
 import com.agan.breakingnews.R;
+import com.agan.breakingnews.Utils.NightModeHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +43,7 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
     private TabLayout tabLayout;
     private ViewPager content;
     private FloatingActionButton floatingActionButton;
+
 
     @Nullable
     @Override
@@ -105,9 +110,30 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.nav_login:
-                if (getActivity() instanceof FragmentTrans){
-                    ((ControlActivity) getActivity()).toLoginFragment();
+            case R.id.nav_userInfo:
+                if (App.getUserName() == null || App.getUserName().equals("")){
+                    Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
+                    if (getActivity() instanceof FragmentTrans){
+                        ((ControlActivity) getActivity()).toLoginFragment();
+                    }
+                }else {
+                    if (getActivity() instanceof FragmentTrans) {
+                        ((ControlActivity) getActivity()).toUserInfoFragment();
+                    }
+                }
+                break;
+            case R.id.nav_night:
+                NightModeHelper nightModeHelper = new NightModeHelper(getActivity(), R.style.AppTheme);
+                nightModeHelper.toggle();
+                break;
+            case R.id.nav_suggest:
+                if(getActivity() instanceof FragmentTrans){
+                    ((FragmentTrans) getActivity()).toSuggestFragment();
+                }
+                break;
+            case R.id.nav_about:
+                if(getActivity() instanceof FragmentTrans){
+                    ((FragmentTrans) getActivity()).toAboutFragment();
                 }
                 break;
         }

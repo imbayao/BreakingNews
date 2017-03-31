@@ -8,7 +8,7 @@ package com.agan.breakingnews;
  */
 
 public class App{
-    private final static String BASE_URL = "http://10.0.3.2:3000/api";
+    private final static String BASE_URL = "http://192.168.199.240:3000/api";
     private final static String URL_LOGIN = "/login";
     private final static String URL_REGISTER = "/register";
     private final static String URL_SCHOOL_NEWS = "/school";
@@ -17,6 +17,7 @@ public class App{
     private final static String URL_COMMENT_GET = "/getcomment";
     private final static String URL_COMMENT_SEND = "/sendcomment";
     private static String TOKEN;
+    private static String USER_NAME;
 
     public static String getBaseUrl() {
         return BASE_URL;
@@ -58,5 +59,11 @@ public class App{
         App.TOKEN = TOKEN;
     }
 
+    public static String getUserName() {
+        return USER_NAME;
+    }
 
+    public static void setUserName(String userName) {
+        USER_NAME = userName;
+    }
 }

@@ -39,7 +39,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    progressDialog.dismiss();
+                    if (progressDialog != null){
+                        progressDialog.dismiss();
+                    }
                     Toast.makeText(getActivity(), msg.obj.toString(), Toast.LENGTH_SHORT).show();
                     break;
                 case 0:
@@ -71,6 +73,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.register_bt:
+                //progressDialog.show();
                 registerState();
                 break;
         }
@@ -82,7 +85,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         }else if (password.getText().toString().equals("")){
             Toast.makeText(getActivity(), "请输入密码", Toast.LENGTH_SHORT).show();
         }else {
-            progressDialog.show();
             new Thread(new Runnable() {
                 @Override
                 public void run() {

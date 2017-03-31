@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1C1C1C</color>
+    <color name="colorPrimaryDark">#7D4112</color>
+    <color name="colorAccent">#1F1F1F</color>
+
+    <!-- 文本颜色 -->
+    <color name="textColor">#ffffff</color>
+    <!-- 分割线颜色 -->
+    <color name="colorNewsDivider">#1C1C1C</color>
+</resources>
